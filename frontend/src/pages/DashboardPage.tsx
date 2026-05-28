@@ -52,7 +52,6 @@ export default function DashboardPage() {
 
   return (
     <div className="dashboard">
-      <h1 className="page-title">Главная</h1>
 
       <div className="dashboard-summary">
         <div className="dashboard-total-card card">

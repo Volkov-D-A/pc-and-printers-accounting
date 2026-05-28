@@ -13,7 +13,8 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-md);
-  padding: var(--spacing-xl) var(--spacing-lg);
+  height: var(--header-height);
+  padding: 0 var(--spacing-lg);
   border-bottom: 1px solid var(--surface-border);
 }
 

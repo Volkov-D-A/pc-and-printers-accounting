@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import { useAppContext } from '../../context/AppContext';
 import { 
   BarChart3, 
   Monitor, 
@@ -21,6 +22,15 @@ const navItems = [
 ];
 
 export default function Sidebar() {
+  const { editMode } = useAppContext();
+
+  const filteredNavItems = navItems.filter(item => {
+    if (!editMode && (item.path === '/dictionaries' || item.path === '/settings')) {
+      return false;
+    }
+    return true;
+  });
+
   return (
     <aside className="sidebar">
       <div className="sidebar-logo">
@@ -29,7 +39,7 @@ export default function Sidebar() {
       </div>
 
       <nav className="sidebar-nav">
-        {navItems.map((item) => (
+        {filteredNavItems.map((item) => (
           <NavLink
             key={item.path}
             to={item.path}

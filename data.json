@@ -1,6 +1,6 @@
 {
-  "version": 32,
-  "lastModified": "2026-05-28T23:38:09+05:00",
+  "version": 33,
+  "lastModified": "2026-05-28T23:42:52+05:00",
   "modifiedBy": "dimas",
   "building": {
     "name": "Главный корпус",
@@ -326,6 +326,30 @@
       "specificFields": {
         "hostname": "ws-buh-aeyu",
         "os": "Windows"
+      },
+      "components": []
+    },
+    {
+      "id": "45496683-0b57-4c64-8ce1-df416cf8bcd1",
+      "type": "laptop",
+      "inventoryNumber": "1101043344",
+      "responsibleUserId": "351ab18c-68e1-4282-b0d9-fe5c36b6288d",
+      "roomId": "120b81f3-6ef8-4e31-948b-e1dfd2ffe1e7",
+      "commissionDate": "2026-05-28",
+      "notes": "",
+      "ipMode": "dhcp",
+      "ipAddress": "",
+      "commonFields": {
+        "startYear": "2016",
+        "model": "Asus",
+        "serialNumber": ""
+      },
+      "specificFields": {
+        "driveSize": "250",
+        "driveType": "NVMe",
+        "hostname": "ws-it-nb",
+        "os": "Windows",
+        "ram": "8"
       },
       "components": []
     }

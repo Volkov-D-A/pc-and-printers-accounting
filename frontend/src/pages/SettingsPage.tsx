@@ -74,7 +74,6 @@ export default function SettingsPage({ onFileSelected }: SettingsPageProps) {
 
   return (
     <div style={{ padding: 'var(--spacing-xl)' }}>
-      <h1 className="page-title">Настройки</h1>
 
       {!appConfig?.dataFilePath && (
         <div className="card" style={{ marginBottom: 'var(--spacing-lg)', border: '1px solid var(--accent-warning)' }}>

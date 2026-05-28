@@ -1,4 +1,5 @@
 import { Lock, Unlock } from 'lucide-react';
+import { useLocation } from 'react-router-dom';
 import './Header.css';
 
 interface HeaderProps {
@@ -6,11 +7,25 @@ interface HeaderProps {
   onToggleEditMode: () => void;
 }
 
+const getTitle = (path: string) => {
+  if (path === '/') return 'Главная';
+  if (path.startsWith('/equipment')) return 'Техника';
+  if (path.startsWith('/floorplan')) return 'Поэтажный план';
+  if (path.startsWith('/licenses')) return 'Лицензии';
+  if (path.startsWith('/dictionaries')) return 'Справочники';
+  if (path.startsWith('/reports')) return 'Отчёты';
+  if (path.startsWith('/settings')) return 'Настройки';
+  return '';
+};
+
 export default function Header({ editMode, onToggleEditMode }: HeaderProps) {
+  const location = useLocation();
+  const title = getTitle(location.pathname);
+
   return (
     <header className="header">
       <div className="header-left">
-        {/* Будет содержать breadcrumb / заголовок страницы */}
+        {title && <h1 className="header-page-title">{title}</h1>}
       </div>
 
       <div className="header-right">

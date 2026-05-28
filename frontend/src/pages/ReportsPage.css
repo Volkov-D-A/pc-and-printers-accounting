@@ -1,0 +1,7 @@
+.reports-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: var(--spacing-xl);
+}

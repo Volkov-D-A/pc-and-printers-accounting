@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { useAppContext } from '../context/AppContext';
 import type { FloorPlan, FloorPlanRoom, Room, Equipment } from '../types';
+import { EQUIPMENT_TYPE_LABELS } from '../types';
 import { UpdateFloorPlan } from '../../wailsjs/go/main/App';
 import { MousePointer2, User } from 'lucide-react';
 import EquipmentViewModal from '../components/equipment/EquipmentViewModal';
@@ -8,9 +9,9 @@ import './FloorPlanPage.css';
 
 // Константы
 const FLOORS = [
-  { level: 0, label: 'Цокольный этаж' },
-  { level: 1, label: '1 Этаж' },
-  { level: 2, label: '2 Этаж' },
+  { level: 0, label: '0 эт.' },
+  { level: 1, label: '1 эт.' },
+  { level: 2, label: '2 эт.' },
 ];
 
 const DEFAULT_WIDTH = 1200;
@@ -158,33 +159,7 @@ export default function FloorPlanPage() {
 
   return (
     <div className="floorplan-page">
-      <div className="page-header">
-        <h1 className="page-title">Поэтажный план</h1>
-        
-        <div className="floor-tabs">
-          {FLOORS.map(f => (
-            <button
-              key={f.level}
-              className={`btn ${currentFloor === f.level ? 'btn-primary' : 'btn-secondary'}`}
-              onClick={() => setCurrentFloor(f.level)}
-            >
-              {f.label}
-            </button>
-          ))}
-        </div>
 
-        {editMode && (
-          <div style={{ display: 'flex', gap: 'var(--spacing-md)' }}>
-            <button 
-              className="btn btn-primary" 
-              onClick={handleSave} 
-              disabled={!hasUnsavedChanges}
-            >
-              {hasUnsavedChanges ? '💾 Сохранить (есть изменения)' : '💾 Сохранено'}
-            </button>
-          </div>
-        )}
-      </div>
 
       <div className="floorplan-layout">
         {/* SVG Редактор/Вьювер */}
@@ -249,6 +224,33 @@ export default function FloorPlanPage() {
 
         {/* Сайдбар панели управления */}
         <div className="floorplan-sidebar">
+          <div className="card">
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-md)' }}>
+              <div className="floor-tabs" style={{ display: 'flex', gap: 'var(--spacing-sm)', flexWrap: 'wrap' }}>
+                {FLOORS.map(f => (
+                  <button
+                    key={f.level}
+                    className={`btn ${currentFloor === f.level ? 'btn-primary' : 'btn-secondary'}`}
+                    onClick={() => setCurrentFloor(f.level)}
+                    style={{ flex: 1, minWidth: '80px', padding: 'var(--spacing-sm)' }}
+                  >
+                    {f.label}
+                  </button>
+                ))}
+              </div>
+
+              {editMode && (
+                <button 
+                  className="btn btn-primary" 
+                  onClick={handleSave} 
+                  disabled={!hasUnsavedChanges}
+                  style={{ width: '100%', justifyContent: 'center' }}
+                >
+                  {hasUnsavedChanges ? '💾 Сохранить' : '💾 Сохранено'}
+                </button>
+              )}
+            </div>
+          </div>
           {editMode ? (
             <div className="card">
               <h3 className="section-subtitle">Редактор (Этаж {currentFloor})</h3>
@@ -319,8 +321,10 @@ export default function FloorPlanPage() {
                                   onClick={() => setViewingEquipment(eq)}
                                   className="table-row-hover"
                                 >
-                                  <div style={{ fontWeight: 'bold', fontSize: 'var(--font-size-sm)' }}>{eq.inventoryNumber}</div>
-                                  <div style={{ fontSize: 'var(--font-size-sm)' }}>{eq.commonFields.model} (Год: {eq.commonFields.startYear || '—'})</div>
+                                  <div style={{ fontWeight: 'bold', fontSize: 'var(--font-size-sm)', display: 'flex', gap: '4px' }}>
+                                    <span>{eq.inventoryNumber}</span>
+                                    <span style={{ color: 'var(--text-secondary)', fontWeight: 'normal' }}>({EQUIPMENT_TYPE_LABELS[eq.type]})</span>
+                                  </div>
                                 </div>
                               ))}
                             </div>

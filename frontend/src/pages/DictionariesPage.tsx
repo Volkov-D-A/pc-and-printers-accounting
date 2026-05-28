@@ -74,8 +74,7 @@ export default function DictionariesPage() {
 
   return (
     <div style={{ padding: 'var(--spacing-xl)' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 'var(--spacing-xl)' }}>
-        <h1 className="page-title" style={{ margin: 0 }}>Справочники</h1>
+      <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 'var(--spacing-xl)' }}>
         {editMode && (
           <button className="btn btn-primary" onClick={handleAddNew}>+ Добавить запись</button>
         )}

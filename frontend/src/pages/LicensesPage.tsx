@@ -79,8 +79,7 @@ export default function LicensesPage() {
 
   return (
     <div className="licenses-page" style={{ padding: 'var(--spacing-xl)', height: '100%', display: 'flex', flexDirection: 'column' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 'var(--spacing-xl)' }}>
-        <h1 className="page-title" style={{ margin: 0 }}>Лицензии ПО</h1>
+      <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 'var(--spacing-xl)' }}>
         {editMode && (
           <button className="btn btn-primary" onClick={handleAdd}>+ Добавить лицензию</button>
         )}

@@ -153,9 +153,14 @@ export default function App() {
                   <Route path="/equipment" element={<EquipmentPage />} />
                   <Route path="/floorplan" element={<FloorPlanPage />} />
                   <Route path="/licenses" element={<LicensesPage />} />
-                  <Route path="/dictionaries" element={<DictionariesPage />} />
                   <Route path="/reports" element={<ReportsPage />} />
-                  <Route path="/settings" element={<SettingsPage onFileSelected={initializeApp} />} />
+                  {editMode && (
+                    <>
+                      <Route path="/dictionaries" element={<DictionariesPage />} />
+                      <Route path="/settings" element={<SettingsPage onFileSelected={initializeApp} />} />
+                    </>
+                  )}
+                  <Route path="*" element={<Navigate to="/" replace />} />
                 </Routes>
               )}
             </main>
