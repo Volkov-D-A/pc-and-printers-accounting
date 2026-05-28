@@ -11,5 +11,4 @@ type Room struct {
 	ID     string `json:"id"`
 	Floor  int    `json:"floor"`
 	Number string `json:"number"`
-	Name   string `json:"name"`
 }

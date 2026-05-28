@@ -1,21 +1,30 @@
 import { NavLink } from 'react-router-dom';
+import { 
+  BarChart3, 
+  Monitor, 
+  Building2, 
+  ScrollText, 
+  FolderTree, 
+  ClipboardList, 
+  Settings 
+} from 'lucide-react';
 import './Sidebar.css';
 
 const navItems = [
-  { path: '/', label: 'Главная', icon: '📊' },
-  { path: '/equipment', label: 'Техника', icon: '🖥️' },
-  { path: '/floorplan', label: 'Поэтажный план', icon: '🏢' },
-  { path: '/licenses', label: 'Лицензии', icon: '📜' },
-  { path: '/dictionaries', label: 'Справочники', icon: '📁' },
-  { path: '/reports', label: 'Отчёты', icon: '📋' },
-  { path: '/settings', label: 'Настройки', icon: '⚙️' },
+  { path: '/', label: 'Главная', icon: <BarChart3 size={20} /> },
+  { path: '/equipment', label: 'Техника', icon: <Monitor size={20} /> },
+  { path: '/floorplan', label: 'Поэтажный план', icon: <Building2 size={20} /> },
+  { path: '/licenses', label: 'Лицензии', icon: <ScrollText size={20} /> },
+  { path: '/dictionaries', label: 'Справочники', icon: <FolderTree size={20} /> },
+  { path: '/reports', label: 'Отчёты', icon: <ClipboardList size={20} /> },
+  { path: '/settings', label: 'Настройки', icon: <Settings size={20} /> },
 ];
 
 export default function Sidebar() {
   return (
     <aside className="sidebar">
       <div className="sidebar-logo">
-        <span className="sidebar-logo-icon">🖥️</span>
+        <Monitor size={24} className="sidebar-logo-icon" />
         <span className="sidebar-logo-text">Учёт техники</span>
       </div>
 

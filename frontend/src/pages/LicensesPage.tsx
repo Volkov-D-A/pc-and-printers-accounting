@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react';
 import { useAppContext } from '../context/AppContext';
 import type { License } from '../types';
 import { AddLicense, UpdateLicense, DeleteLicense } from '../../wailsjs/go/main/App';
+import { Pencil, Trash2 } from 'lucide-react';
 import './LicensesPage.css';
 
 export default function LicensesPage() {
@@ -124,8 +125,8 @@ export default function LicensesPage() {
                   {editMode && (
                     <td style={{ textAlign: 'right' }}>
                       <div style={{ display: 'flex', gap: 'var(--spacing-sm)', justifyContent: 'flex-end' }}>
-                        <button className="btn btn-icon btn-secondary" onClick={() => handleEdit(l)}>✏️</button>
-                        <button className="btn btn-icon btn-danger" onClick={() => handleDelete(l.id)}>🗑️</button>
+                        <button className="btn btn-icon btn-secondary" onClick={() => handleEdit(l)}><Pencil size={16} /></button>
+                        <button className="btn btn-icon btn-danger" onClick={() => handleDelete(l.id)}><Trash2 size={16} /></button>
                       </div>
                     </td>
                   )}

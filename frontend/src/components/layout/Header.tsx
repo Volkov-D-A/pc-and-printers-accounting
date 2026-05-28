@@ -1,3 +1,4 @@
+import { Lock, Unlock } from 'lucide-react';
 import './Header.css';
 
 interface HeaderProps {
@@ -18,7 +19,7 @@ export default function Header({ editMode, onToggleEditMode }: HeaderProps) {
           onClick={onToggleEditMode}
           title={editMode ? 'Выйти из режима редактирования' : 'Включить редактирование'}
         >
-          <span className="header-edit-icon">{editMode ? '🔓' : '🔒'}</span>
+          <span className="header-edit-icon">{editMode ? <Unlock size={16} /> : <Lock size={16} />}</span>
           <span className="header-edit-label">
             {editMode ? 'Редактирование' : 'Просмотр'}
           </span>

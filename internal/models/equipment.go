@@ -9,7 +9,6 @@ const (
 	EquipmentTypeMonoblock EquipmentType = "monoblock"
 	EquipmentTypePrinter   EquipmentType = "printer"
 	EquipmentTypeMFP       EquipmentType = "mfp"
-	EquipmentTypeScanner   EquipmentType = "scanner"
 	EquipmentTypeRouter    EquipmentType = "router"
 	EquipmentTypeSwitch    EquipmentType = "switch"
 )
@@ -21,7 +20,6 @@ var EquipmentTypeLabels = map[EquipmentType]string{
 	EquipmentTypeMonoblock: "Моноблок",
 	EquipmentTypePrinter:   "Принтер",
 	EquipmentTypeMFP:       "МФУ",
-	EquipmentTypeScanner:   "Сканер",
 	EquipmentTypeRouter:    "Маршрутизатор",
 	EquipmentTypeSwitch:    "Коммутатор",
 }
@@ -29,13 +27,13 @@ var EquipmentTypeLabels = map[EquipmentType]string{
 // AllEquipmentTypes — все допустимые типы техники
 var AllEquipmentTypes = []EquipmentType{
 	EquipmentTypePC, EquipmentTypeLaptop, EquipmentTypeMonoblock,
-	EquipmentTypePrinter, EquipmentTypeMFP, EquipmentTypeScanner,
+	EquipmentTypePrinter, EquipmentTypeMFP,
 	EquipmentTypeRouter, EquipmentTypeSwitch,
 }
 
 // CommonFields — общие поля для всех типов техники
 type CommonFields struct {
-	Manufacturer string `json:"manufacturer"`
+	StartYear    string `json:"startYear"`
 	Model        string `json:"model"`
 	SerialNumber string `json:"serialNumber"`
 }
@@ -49,6 +47,8 @@ type Equipment struct {
 	RoomID            string                 `json:"roomId"`
 	CommissionDate    string                 `json:"commissionDate"`
 	Notes             string                 `json:"notes"`
+	IPMode            string                 `json:"ipMode"`
+	IPAddress         string                 `json:"ipAddress"`
 	CommonFields      CommonFields           `json:"commonFields"`
 	SpecificFields    map[string]interface{} `json:"specificFields"`
 	Components        []Component            `json:"components"`

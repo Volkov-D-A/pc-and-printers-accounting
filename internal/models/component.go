@@ -14,6 +14,8 @@ const (
 	ComponentTypeCPU         ComponentType = "cpu"
 	ComponentTypeOptical     ComponentType = "optical"
 	ComponentTypeController  ComponentType = "controller"
+	ComponentTypeMonitor     ComponentType = "monitor"
+	ComponentTypeUPS         ComponentType = "ups"
 )
 
 // ComponentTypeLabels — русские названия типов комплектующих
@@ -28,6 +30,8 @@ var ComponentTypeLabels = map[ComponentType]string{
 	ComponentTypeCPU:         "Процессор",
 	ComponentTypeOptical:     "Оптический привод",
 	ComponentTypeController:  "Контроллер (RAID и др.)",
+	ComponentTypeMonitor:     "Монитор",
+	ComponentTypeUPS:         "ИБП",
 }
 
 // AllComponentTypes — все допустимые типы комплектующих
@@ -36,6 +40,7 @@ var AllComponentTypes = []ComponentType{
 	ComponentTypeGPU, ComponentTypePSU, ComponentTypeNIC,
 	ComponentTypeMotherboard, ComponentTypeCPU,
 	ComponentTypeOptical, ComponentTypeController,
+	ComponentTypeMonitor, ComponentTypeUPS,
 }
 
 // Component — комплектующее, привязанное к технике

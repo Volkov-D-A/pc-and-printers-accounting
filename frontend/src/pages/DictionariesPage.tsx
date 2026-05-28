@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useAppContext } from '../context/AppContext';
+import { Pencil, Trash2 } from 'lucide-react';
 import type { Department, ResponsibleUser, Room } from '../types';
 import { AddDepartment, UpdateDepartment, DeleteDepartment, AddUser, UpdateUser, DeleteUser, AddRoom, UpdateRoom, DeleteRoom } from '../../wailsjs/go/main/App';
 
@@ -14,7 +15,7 @@ export default function DictionariesPage() {
   
   const [deptForm, setDeptForm] = useState<Partial<Department>>({ name: '' });
   const [userForm, setUserForm] = useState<Partial<ResponsibleUser>>({ lastName: '', firstName: '', patronymic: '', departmentId: '' });
-  const [roomForm, setRoomForm] = useState<Partial<Room>>({ number: '', name: '', floor: 1 });
+  const [roomForm, setRoomForm] = useState<Partial<Room>>({ number: '', floor: 1 });
 
   // === Departments ===
   const handleEditDept = (d: Department) => { setDeptForm(d); setShowForm(true); };
@@ -68,7 +69,7 @@ export default function DictionariesPage() {
     setShowForm(true);
     if (activeTab === 'departments') setDeptForm({ name: '' });
     else if (activeTab === 'users') setUserForm({ lastName: '', firstName: '', patronymic: '', departmentId: '' });
-    else if (activeTab === 'rooms') setRoomForm({ number: '', name: '', floor: 1 });
+    else if (activeTab === 'rooms') setRoomForm({ number: '', floor: 1 });
   };
 
   return (
@@ -95,10 +96,10 @@ export default function DictionariesPage() {
                 <tr key={d.id}>
                   <td>{d.name}</td>
                   {editMode && (
-                    <td style={{textAlign:'right'}}>
-                      <button className="btn btn-icon btn-secondary" onClick={() => handleEditDept(d)}>✏️</button>
-                      <button className="btn btn-icon btn-danger" onClick={() => handleDeleteDept(d.id)}>🗑️</button>
-                    </td>
+                      <td style={{textAlign:'right'}}>
+                        <button className="btn btn-icon btn-secondary" onClick={() => handleEditDept(d)}><Pencil size={16} /></button>
+                        <button className="btn btn-icon btn-danger" onClick={() => handleDeleteDept(d.id)}><Trash2 size={16} /></button>
+                      </td>
                   )}
                 </tr>
               ))}
@@ -118,8 +119,8 @@ export default function DictionariesPage() {
                     <td>{dept?.name || '-'}</td>
                     {editMode && (
                       <td style={{textAlign:'right'}}>
-                        <button className="btn btn-icon btn-secondary" onClick={() => handleEditUser(u)}>✏️</button>
-                        <button className="btn btn-icon btn-danger" onClick={() => handleDeleteUser(u.id)}>🗑️</button>
+                        <button className="btn btn-icon btn-secondary" onClick={() => handleEditUser(u)}><Pencil size={16} /></button>
+                        <button className="btn btn-icon btn-danger" onClick={() => handleDeleteUser(u.id)}><Trash2 size={16} /></button>
                       </td>
                     )}
                   </tr>
@@ -131,17 +132,16 @@ export default function DictionariesPage() {
 
         {activeTab === 'rooms' && (
           <table className="table">
-            <thead><tr><th>Номер</th><th>Название</th><th>Этаж</th>{editMode && <th style={{textAlign:'right'}}>Действия</th>}</tr></thead>
+            <thead><tr><th>Номер</th><th>Этаж</th>{editMode && <th style={{textAlign:'right'}}>Действия</th>}</tr></thead>
             <tbody>
               {data?.rooms.map(r => (
                 <tr key={r.id}>
                   <td><span className="badge badge-primary">{r.number}</span></td>
-                  <td>{r.name}</td>
                   <td>{r.floor}</td>
                   {editMode && (
                     <td style={{textAlign:'right'}}>
-                      <button className="btn btn-icon btn-secondary" onClick={() => handleEditRoom(r)}>✏️</button>
-                      <button className="btn btn-icon btn-danger" onClick={() => handleDeleteRoom(r.id)}>🗑️</button>
+                      <button className="btn btn-icon btn-secondary" onClick={() => handleEditRoom(r)}><Pencil size={16} /></button>
+                      <button className="btn btn-icon btn-danger" onClick={() => handleDeleteRoom(r.id)}><Trash2 size={16} /></button>
                     </td>
                   )}
                 </tr>
@@ -203,10 +203,7 @@ export default function DictionariesPage() {
                   <label className="form-label">Номер</label>
                   <input className="input" value={roomForm.number} onChange={e => setRoomForm({...roomForm, number: e.target.value})} required />
                 </div>
-                <div className="form-group mb-sm">
-                  <label className="form-label">Название / Описание</label>
-                  <input className="input" value={roomForm.name} onChange={e => setRoomForm({...roomForm, name: e.target.value})} required />
-                </div>
+
                 <div className="form-group mb-lg">
                   <label className="form-label">Этаж</label>
                   <select className="select" value={roomForm.floor} onChange={e => setRoomForm({...roomForm, floor: Number(e.target.value)})}>

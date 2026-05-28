@@ -2,6 +2,16 @@ import { useEffect, useState } from 'react';
 import { EQUIPMENT_TYPE_LABELS } from '../types';
 import type { EquipmentType } from '../types';
 import { useAppContext } from '../context/AppContext';
+import { 
+  FolderOpen, 
+  PcCase, 
+  Laptop, 
+  MonitorSmartphone, 
+  Printer, 
+  Settings2, 
+  Router, 
+  Network 
+} from 'lucide-react';
 import './DashboardPage.css';
 
 export default function DashboardPage() {
@@ -23,22 +33,21 @@ export default function DashboardPage() {
   if (!data) {
     return (
       <div className="empty-state">
-        <div className="empty-state-icon">📂</div>
+        <div className="empty-state-icon"><FolderOpen size={48} /></div>
         <div className="empty-state-title">Файл данных не загружен</div>
         <p>Перейдите в настройки и укажите путь к файлу данных</p>
       </div>
     );
   }
 
-  const statCards: { type: EquipmentType; icon: string }[] = [
-    { type: 'pc', icon: '🖥️' },
-    { type: 'laptop', icon: '💻' },
-    { type: 'monoblock', icon: '🖥️' },
-    { type: 'printer', icon: '🖨️' },
-    { type: 'mfp', icon: '📠' },
-    { type: 'scanner', icon: '📷' },
-    { type: 'router', icon: '📡' },
-    { type: 'switch', icon: '🔌' },
+  const statCards: { type: EquipmentType; icon: React.ReactNode }[] = [
+    { type: 'pc', icon: <PcCase size={24} /> },
+    { type: 'laptop', icon: <Laptop size={24} /> },
+    { type: 'monoblock', icon: <MonitorSmartphone size={24} /> },
+    { type: 'printer', icon: <Printer size={24} /> },
+    { type: 'mfp', icon: <Settings2 size={24} /> },
+    { type: 'router', icon: <Router size={24} /> },
+    { type: 'switch', icon: <Network size={24} /> },
   ];
 
   return (

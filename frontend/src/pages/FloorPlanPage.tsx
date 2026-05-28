@@ -2,6 +2,8 @@ import { useState, useMemo } from 'react';
 import { useAppContext } from '../context/AppContext';
 import type { FloorPlan, FloorPlanRoom, Room, Equipment } from '../types';
 import { UpdateFloorPlan } from '../../wailsjs/go/main/App';
+import { MousePointer2, User } from 'lucide-react';
+import EquipmentViewModal from '../components/equipment/EquipmentViewModal';
 import './FloorPlanPage.css';
 
 // Константы
@@ -23,6 +25,7 @@ export default function FloorPlanPage() {
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+  const [viewingEquipment, setViewingEquipment] = useState<Equipment | null>(null);
   
   // Локальный стейт текущего плана для редактирования (до сохранения)
   const currentPlan = useMemo(() => {
@@ -49,6 +52,16 @@ export default function FloorPlanPage() {
     return data.equipment.filter(eq => eq.roomId === selectedRoomId);
   }, [selectedRoomId, data]);
 
+  const equipmentByUser = useMemo(() => {
+    const grouped: Record<string, Equipment[]> = {};
+    equipmentInSelectedRoom.forEach(eq => {
+      const uid = eq.responsibleUserId || 'unassigned';
+      if (!grouped[uid]) grouped[uid] = [];
+      grouped[uid].push(eq);
+    });
+    return grouped;
+  }, [equipmentInSelectedRoom]);
+
   const selectedLogicalRoom = useMemo(() => {
     if (!selectedRoomId || !data) return null;
     return data.rooms.find(r => r.id === selectedRoomId);
@@ -57,6 +70,7 @@ export default function FloorPlanPage() {
   // === События редактора (Только в editMode) ===
 
   const handleMouseDown = (e: React.MouseEvent<SVGRectElement>, room: FloorPlanRoom) => {
+    e.stopPropagation();
     if (!editMode) {
       setSelectedRoomId(room.roomId);
       return;
@@ -74,13 +88,16 @@ export default function FloorPlanPage() {
     const dx = e.clientX - dragStart.x;
     const dy = e.clientY - dragStart.y;
 
+    const GRID_SIZE = 25;
+    const snap = (val: number) => Math.round(val / GRID_SIZE) * GRID_SIZE;
+
     // В реальном приложении нужно учитывать масштаб (zoom/pan), но здесь для простоты 1:1
     setLocalRooms(prev => prev.map(r => {
       if (r.roomId === selectedRoomId) {
         return {
           ...r,
-          x: Math.max(0, dragOffset.x + dx),
-          y: Math.max(0, dragOffset.y + dy)
+          x: Math.max(0, snap(dragOffset.x + dx)),
+          y: Math.max(0, snap(dragOffset.y + dy))
         };
       }
       return r;
@@ -104,7 +121,7 @@ export default function FloorPlanPage() {
       return;
     }
     const newRoom: FloorPlanRoom = {
-      roomId, shape: 'rect', x: 50, y: 50, width: 150, height: 100, color: '#6366f1'
+      roomId, shape: 'rect', x: 50, y: 50, width: 100, height: 75, color: '#6366f1'
     };
     setLocalRooms([...localRooms, newRoom]);
     setSelectedRoomId(roomId);
@@ -184,8 +201,8 @@ export default function FloorPlanPage() {
           >
             {/* Сетка (опционально) */}
             <defs>
-              <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
-                <path d="M 50 0 L 0 0 0 50" fill="none" stroke="var(--surface-border)" strokeWidth="0.5" />
+              <pattern id="grid" width="25" height="25" patternUnits="userSpaceOnUse">
+                <path d="M 25 0 L 0 0 0 25" fill="none" stroke="var(--surface-border)" strokeWidth="0.5" />
               </pattern>
             </defs>
             <rect width="100%" height="100%" fill="url(#grid)" />
@@ -208,6 +225,7 @@ export default function FloorPlanPage() {
                     strokeWidth={isSelected ? 3 : 1}
                     style={{ cursor: editMode ? 'grab' : 'pointer', transition: 'fill-opacity 0.2s' }}
                     onMouseDown={(e) => handleMouseDown(e, room)}
+                    onClick={(e) => e.stopPropagation()}
                   />
                   {logicalRoom && (
                     <text
@@ -243,7 +261,7 @@ export default function FloorPlanPage() {
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-sm)', marginTop: 'var(--spacing-sm)' }}>
                     {unmappedRooms.map(r => (
                       <button key={r.id} className="btn btn-secondary btn-sm" onClick={() => handleAddRoom(r.id)}>
-                        + {r.number} ({r.name})
+                        + {r.number}
                       </button>
                     ))}
                   </div>
@@ -253,7 +271,7 @@ export default function FloorPlanPage() {
               {selectedRoomId && selectedLogicalRoom && (
                 <div style={{ padding: 'var(--spacing-md)', background: 'var(--bg-tertiary)', borderRadius: 'var(--border-radius-md)' }}>
                   <div style={{ fontWeight: 'bold', marginBottom: 'var(--spacing-sm)' }}>
-                    Выбран: {selectedLogicalRoom.number} ({selectedLogicalRoom.name})
+                    Выбран: {selectedLogicalRoom.number}
                   </div>
                   <button className="btn btn-danger btn-sm" onClick={handleRemoveRoom} style={{ width: '100%' }}>
                     Убрать с плана
@@ -267,7 +285,7 @@ export default function FloorPlanPage() {
               
               {!selectedRoomId ? (
                 <div className="empty-state" style={{ padding: 'var(--spacing-xl)' }}>
-                  <div className="empty-state-icon" style={{ fontSize: '2rem' }}>🖱️</div>
+                  <div className="empty-state-icon" style={{ fontSize: '2rem' }}><MousePointer2 size={32} /></div>
                   <p>Кликните на кабинет для просмотра деталей</p>
                 </div>
               ) : selectedLogicalRoom ? (
@@ -275,21 +293,40 @@ export default function FloorPlanPage() {
                   <div style={{ fontSize: 'var(--font-size-lg)', fontWeight: 'bold', marginBottom: 'var(--spacing-sm)' }}>
                     Кабинет {selectedLogicalRoom.number}
                   </div>
-                  <div style={{ color: 'var(--text-secondary)', marginBottom: 'var(--spacing-lg)' }}>
-                    {selectedLogicalRoom.name}
-                  </div>
 
                   <h4 style={{ marginBottom: 'var(--spacing-sm)' }}>Техника ({equipmentInSelectedRoom.length}):</h4>
                   {equipmentInSelectedRoom.length === 0 ? (
                     <div className="text-muted text-sm">В кабинете нет закреплённой техники</div>
                   ) : (
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-sm)', maxHeight: '400px', overflowY: 'auto' }}>
-                      {equipmentInSelectedRoom.map(eq => (
-                        <div key={eq.id} style={{ padding: 'var(--spacing-sm)', background: 'var(--bg-tertiary)', borderRadius: 'var(--border-radius-md)' }}>
-                          <div style={{ fontWeight: 'bold', fontSize: 'var(--font-size-sm)' }}>{eq.inventoryNumber}</div>
-                          <div style={{ fontSize: 'var(--font-size-sm)' }}>{eq.commonFields.manufacturer} {eq.commonFields.model}</div>
-                        </div>
-                      ))}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-md)', maxHeight: '400px', overflowY: 'auto' }}>
+                      {Object.entries(equipmentByUser).map(([userId, eqs]) => {
+                        let userName = 'Без ответственного';
+                        if (userId !== 'unassigned') {
+                          const u = data?.responsibleUsers.find(u => u.id === userId);
+                          if (u) userName = `${u.lastName} ${u.firstName[0]}. ${u.patronymic?.[0] ? u.patronymic[0] + '.' : ''}`.trim();
+                        }
+
+                        return (
+                          <div key={userId}>
+                            <div style={{ fontWeight: 'bold', fontSize: 'var(--font-size-sm)', marginBottom: 'var(--spacing-xs)', color: 'var(--accent-primary)', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                              <User size={14} /> {userName} ({eqs.length})
+                            </div>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-xs)' }}>
+                              {eqs.map(eq => (
+                                <div 
+                                  key={eq.id} 
+                                  style={{ padding: 'var(--spacing-sm)', background: 'var(--bg-tertiary)', borderRadius: 'var(--border-radius-md)', cursor: 'pointer' }}
+                                  onClick={() => setViewingEquipment(eq)}
+                                  className="table-row-hover"
+                                >
+                                  <div style={{ fontWeight: 'bold', fontSize: 'var(--font-size-sm)' }}>{eq.inventoryNumber}</div>
+                                  <div style={{ fontSize: 'var(--font-size-sm)' }}>{eq.commonFields.model} (Год: {eq.commonFields.startYear || '—'})</div>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        );
+                      })}
                     </div>
                   )}
                 </div>
@@ -298,6 +335,13 @@ export default function FloorPlanPage() {
           )}
         </div>
       </div>
+
+      {viewingEquipment && (
+        <EquipmentViewModal
+          equipment={viewingEquipment}
+          onClose={() => setViewingEquipment(null)}
+        />
+      )}
     </div>
   );
 }

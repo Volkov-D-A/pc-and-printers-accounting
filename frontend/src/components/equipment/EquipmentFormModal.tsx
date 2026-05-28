@@ -21,7 +21,9 @@ export default function EquipmentFormModal({ equipment, onClose, onSave }: Equip
     responsibleUserId: '',
     commissionDate: new Date().toISOString().split('T')[0],
     notes: '',
-    commonFields: { manufacturer: '', model: '', serialNumber: '' },
+    ipMode: 'dhcp',
+    ipAddress: '',
+    commonFields: { startYear: '', model: '', serialNumber: '' },
     specificFields: {},
     components: [],
   });
@@ -143,7 +145,7 @@ export default function EquipmentFormModal({ equipment, onClose, onSave }: Equip
                 <select className="select" value={formData.roomId} onChange={(e) => handleChange('roomId', e.target.value)}>
                   <option value="">Не указан</option>
                   {data?.rooms.map((r) => (
-                    <option key={r.id} value={r.id}>{r.number} - {r.name}</option>
+                    <option key={r.id} value={r.id}>{r.number}</option>
                   ))}
                 </select>
               </div>
@@ -160,8 +162,8 @@ export default function EquipmentFormModal({ equipment, onClose, onSave }: Equip
             
             <div className="form-row">
               <div className="form-group">
-                <label className="form-label">Производитель</label>
-                <input className="input" value={formData.commonFields?.manufacturer} onChange={(e) => handleCommonFieldChange('manufacturer', e.target.value)} />
+                <label className="form-label">Год начала эксплуатации</label>
+                <input className="input" placeholder="Например: 2021" value={formData.commonFields?.startYear} onChange={(e) => handleCommonFieldChange('startYear', e.target.value)} />
               </div>
               <div className="form-group">
                 <label className="form-label">Модель</label>
@@ -172,12 +174,27 @@ export default function EquipmentFormModal({ equipment, onClose, onSave }: Equip
                 <input className="input" value={formData.commonFields?.serialNumber} onChange={(e) => handleCommonFieldChange('serialNumber', e.target.value)} />
               </div>
             </div>
+            <div className="form-row">
+              <div className="form-group">
+                <label className="form-label">Сетевой режим (IP)</label>
+                <select className="select" value={formData.ipMode} onChange={(e) => handleChange('ipMode', e.target.value)}>
+                  <option value="dhcp">Динамический (DHCP)</option>
+                  <option value="static">Статический</option>
+                </select>
+              </div>
+              {formData.ipMode === 'static' && (
+                <div className="form-group">
+                  <label className="form-label">IP Адрес</label>
+                  <input className="input" placeholder="192.168.1.10" value={formData.ipAddress} onChange={(e) => handleChange('ipAddress', e.target.value)} />
+                </div>
+              )}
+            </div>
           </div>
 
           <div className="form-section">
             <h3 className="section-subtitle">Специфичные поля (в зависимости от типа)</h3>
             <div className="form-row">
-              {formData.type === 'pc' || formData.type === 'laptop' ? (
+              {formData.type === 'pc' || formData.type === 'laptop' || formData.type === 'monoblock' ? (
                 <>
                   <div className="form-group">
                     <label className="form-label">ОС</label>
@@ -187,23 +204,34 @@ export default function EquipmentFormModal({ equipment, onClose, onSave }: Equip
                     <label className="form-label">Сетевое имя (Hostname)</label>
                     <input className="input" value={(formData.specificFields?.hostname as string) || ''} onChange={(e) => handleSpecificFieldChange('hostname', e.target.value)} />
                   </div>
+
+                  <div className="form-group">
+                    <label className="form-label">Объем ОЗУ (ГБ)</label>
+                    <input className="input" type="number" value={(formData.specificFields?.ram as string) || ''} onChange={(e) => handleSpecificFieldChange('ram', e.target.value)} />
+                  </div>
+                  <div className="form-group">
+                    <label className="form-label">Тип накопителя</label>
+                    <select className="select" value={(formData.specificFields?.driveType as string) || ''} onChange={(e) => handleSpecificFieldChange('driveType', e.target.value)}>
+                      <option value="">Не указан</option>
+                      <option value="HDD">HDD</option>
+                      <option value="SSD">SSD</option>
+                      <option value="NVMe">NVMe</option>
+                    </select>
+                  </div>
+                  <div className="form-group">
+                    <label className="form-label">Объем накопителя (ГБ)</label>
+                    <input className="input" type="number" value={(formData.specificFields?.driveSize as string) || ''} onChange={(e) => handleSpecificFieldChange('driveSize', e.target.value)} />
+                  </div>
                 </>
               ) : formData.type === 'printer' || formData.type === 'mfp' ? (
                 <>
                   <div className="form-group">
-                    <label className="form-label">Тип печати</label>
-                    <select className="select" value={(formData.specificFields?.printType as string) || ''} onChange={(e) => handleSpecificFieldChange('printType', e.target.value)}>
-                      <option value="">Не указано</option>
-                      <option value="laser">Лазерный</option>
-                      <option value="inkjet">Струйный</option>
-                    </select>
+                    <label className="form-label">Тип картриджа</label>
+                    <input className="input" placeholder="Например: CE285A" value={(formData.specificFields?.cartridgeType as string) || ''} onChange={(e) => handleSpecificFieldChange('cartridgeType', e.target.value)} />
                   </div>
                   <div className="form-group">
-                    <label className="form-label">Цветность</label>
-                    <select className="select" value={(formData.specificFields?.isColor as string) || 'false'} onChange={(e) => handleSpecificFieldChange('isColor', e.target.value)}>
-                      <option value="false">ЧБ</option>
-                      <option value="true">Цветной</option>
-                    </select>
+                    <label className="form-label">Тип фотобарабана (опционально)</label>
+                    <input className="input" placeholder="Например: DR-1075" value={(formData.specificFields?.drumType as string) || ''} onChange={(e) => handleSpecificFieldChange('drumType', e.target.value)} />
                   </div>
                 </>
               ) : (

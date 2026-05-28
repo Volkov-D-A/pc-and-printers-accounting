@@ -38,7 +38,7 @@ export namespace models {
 	    }
 	}
 	export class CommonFields {
-	    manufacturer: string;
+	    startYear: string;
 	    model: string;
 	    serialNumber: string;
 	
@@ -48,7 +48,7 @@ export namespace models {
 	
 	    constructor(source: any = {}) {
 	        if ('string' === typeof source) source = JSON.parse(source);
-	        this.manufacturer = source["manufacturer"];
+	        this.startYear = source["startYear"];
 	        this.model = source["model"];
 	        this.serialNumber = source["serialNumber"];
 	    }
@@ -111,6 +111,8 @@ export namespace models {
 	    roomId: string;
 	    commissionDate: string;
 	    notes: string;
+	    ipMode: string;
+	    ipAddress: string;
 	    commonFields: CommonFields;
 	    specificFields: Record<string, any>;
 	    components: Component[];
@@ -128,6 +130,8 @@ export namespace models {
 	        this.roomId = source["roomId"];
 	        this.commissionDate = source["commissionDate"];
 	        this.notes = source["notes"];
+	        this.ipMode = source["ipMode"];
+	        this.ipAddress = source["ipAddress"];
 	        this.commonFields = this.convertValues(source["commonFields"], CommonFields);
 	        this.specificFields = source["specificFields"];
 	        this.components = this.convertValues(source["components"], Component);
@@ -215,7 +219,6 @@ export namespace models {
 	    id: string;
 	    floor: number;
 	    number: string;
-	    name: string;
 	
 	    static createFrom(source: any = {}) {
 	        return new Room(source);
@@ -226,7 +229,6 @@ export namespace models {
 	        this.id = source["id"];
 	        this.floor = source["floor"];
 	        this.number = source["number"];
-	        this.name = source["name"];
 	    }
 	}
 	export class ResponsibleUser {

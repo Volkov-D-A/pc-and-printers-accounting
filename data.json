@@ -1,0 +1,334 @@
+{
+  "version": 32,
+  "lastModified": "2026-05-28T23:38:09+05:00",
+  "modifiedBy": "dimas",
+  "building": {
+    "name": "Главный корпус",
+    "floors": [
+      0,
+      1,
+      2
+    ]
+  },
+  "departments": [
+    {
+      "id": "78cecbaf-b092-426e-8b44-6eea5c449459",
+      "name": "Служба информатизации"
+    },
+    {
+      "id": "8e00944e-0787-42c3-9415-1eb56930daed",
+      "name": "Бухгалтерия"
+    }
+  ],
+  "responsibleUsers": [
+    {
+      "id": "351ab18c-68e1-4282-b0d9-fe5c36b6288d",
+      "lastName": "Волков",
+      "firstName": "Дмитрий",
+      "patronymic": "Анатольевич",
+      "departmentId": "78cecbaf-b092-426e-8b44-6eea5c449459"
+    },
+    {
+      "id": "51538021-c96e-45c5-98e6-a5639f97719d",
+      "lastName": "Архипова",
+      "firstName": "Елена",
+      "patronymic": "Юрьевна",
+      "departmentId": "8e00944e-0787-42c3-9415-1eb56930daed"
+    },
+    {
+      "id": "de932972-89aa-4701-b82d-bcdade5c57e7",
+      "lastName": "Дроздова",
+      "firstName": "Вера",
+      "patronymic": "Константиновна",
+      "departmentId": "8e00944e-0787-42c3-9415-1eb56930daed"
+    }
+  ],
+  "rooms": [
+    {
+      "id": "120b81f3-6ef8-4e31-948b-e1dfd2ffe1e7",
+      "floor": 2,
+      "number": "216"
+    },
+    {
+      "id": "585427b1-0963-429c-a47c-15e40a8a6918",
+      "floor": 2,
+      "number": "217"
+    },
+    {
+      "id": "59c56966-d29b-4824-a3c7-65314648a49a",
+      "floor": 2,
+      "number": "218"
+    },
+    {
+      "id": "06181e7a-f62f-4360-a7e2-045d7dcdd1cb",
+      "floor": 2,
+      "number": "219"
+    },
+    {
+      "id": "433715bc-c4a5-4b9c-9777-b8ffbdd8b1b8",
+      "floor": 2,
+      "number": "220"
+    },
+    {
+      "id": "7a050fe7-b417-4507-bb43-69641bb51946",
+      "floor": 2,
+      "number": "221"
+    },
+    {
+      "id": "1b6bc52c-949e-49f5-9bb0-2aee79da347b",
+      "floor": 2,
+      "number": "222"
+    },
+    {
+      "id": "89e0e98f-24fb-4f7b-aa68-d690cc24435f",
+      "floor": 2,
+      "number": "223"
+    },
+    {
+      "id": "7494aaa8-bbde-4402-8df8-55520e7e169a",
+      "floor": 2,
+      "number": "224"
+    },
+    {
+      "id": "2b24b023-77a1-470b-afea-36282d17e24a",
+      "floor": 2,
+      "number": "225"
+    },
+    {
+      "id": "ac5af92b-11c1-4da2-927f-d8a7ae774d7d",
+      "floor": 2,
+      "number": "226"
+    },
+    {
+      "id": "5f7df225-e5b3-4cfa-8951-1a4899be7021",
+      "floor": 2,
+      "number": "227"
+    },
+    {
+      "id": "1cc7880e-c12f-4812-a847-1641b5dabf98",
+      "floor": 2,
+      "number": "228"
+    },
+    {
+      "id": "4c5960c2-f532-410a-81c6-eacacb5150be",
+      "floor": 2,
+      "number": "229"
+    },
+    {
+      "id": "95af8ca6-28e6-4ec3-91c7-56ca28b9774e",
+      "floor": 2,
+      "number": "230"
+    }
+  ],
+  "floorPlans": [
+    {
+      "floor": 0,
+      "width": 1200,
+      "height": 800,
+      "rooms": []
+    },
+    {
+      "floor": 1,
+      "width": 1200,
+      "height": 800,
+      "rooms": []
+    },
+    {
+      "floor": 2,
+      "width": 1200,
+      "height": 800,
+      "rooms": [
+        {
+          "roomId": "120b81f3-6ef8-4e31-948b-e1dfd2ffe1e7",
+          "shape": "rect",
+          "x": 150,
+          "y": 50,
+          "width": 100,
+          "height": 75,
+          "color": "#6366f1"
+        },
+        {
+          "roomId": "585427b1-0963-429c-a47c-15e40a8a6918",
+          "shape": "rect",
+          "x": 300,
+          "y": 50,
+          "width": 100,
+          "height": 75,
+          "color": "#6366f1"
+        },
+        {
+          "roomId": "59c56966-d29b-4824-a3c7-65314648a49a",
+          "shape": "rect",
+          "x": 400,
+          "y": 50,
+          "width": 100,
+          "height": 75,
+          "color": "#6366f1"
+        },
+        {
+          "roomId": "06181e7a-f62f-4360-a7e2-045d7dcdd1cb",
+          "shape": "rect",
+          "x": 500,
+          "y": 50,
+          "width": 100,
+          "height": 75,
+          "color": "#6366f1"
+        },
+        {
+          "roomId": "433715bc-c4a5-4b9c-9777-b8ffbdd8b1b8",
+          "shape": "rect",
+          "x": 600,
+          "y": 50,
+          "width": 100,
+          "height": 75,
+          "color": "#6366f1"
+        },
+        {
+          "roomId": "7a050fe7-b417-4507-bb43-69641bb51946",
+          "shape": "rect",
+          "x": 700,
+          "y": 50,
+          "width": 100,
+          "height": 75,
+          "color": "#6366f1"
+        },
+        {
+          "roomId": "1b6bc52c-949e-49f5-9bb0-2aee79da347b",
+          "shape": "rect",
+          "x": 800,
+          "y": 50,
+          "width": 100,
+          "height": 75,
+          "color": "#6366f1"
+        },
+        {
+          "roomId": "89e0e98f-24fb-4f7b-aa68-d690cc24435f",
+          "shape": "rect",
+          "x": 800,
+          "y": 175,
+          "width": 100,
+          "height": 75,
+          "color": "#6366f1"
+        },
+        {
+          "roomId": "7494aaa8-bbde-4402-8df8-55520e7e169a",
+          "shape": "rect",
+          "x": 700,
+          "y": 175,
+          "width": 100,
+          "height": 75,
+          "color": "#6366f1"
+        },
+        {
+          "roomId": "2b24b023-77a1-470b-afea-36282d17e24a",
+          "shape": "rect",
+          "x": 600,
+          "y": 175,
+          "width": 100,
+          "height": 75,
+          "color": "#6366f1"
+        },
+        {
+          "roomId": "ac5af92b-11c1-4da2-927f-d8a7ae774d7d",
+          "shape": "rect",
+          "x": 500,
+          "y": 175,
+          "width": 100,
+          "height": 75,
+          "color": "#6366f1"
+        },
+        {
+          "roomId": "5f7df225-e5b3-4cfa-8951-1a4899be7021",
+          "shape": "rect",
+          "x": 400,
+          "y": 175,
+          "width": 100,
+          "height": 75,
+          "color": "#6366f1"
+        },
+        {
+          "roomId": "1cc7880e-c12f-4812-a847-1641b5dabf98",
+          "shape": "rect",
+          "x": 300,
+          "y": 175,
+          "width": 100,
+          "height": 75,
+          "color": "#6366f1"
+        },
+        {
+          "roomId": "4c5960c2-f532-410a-81c6-eacacb5150be",
+          "shape": "rect",
+          "x": 200,
+          "y": 175,
+          "width": 100,
+          "height": 75,
+          "color": "#6366f1"
+        },
+        {
+          "roomId": "95af8ca6-28e6-4ec3-91c7-56ca28b9774e",
+          "shape": "rect",
+          "x": 100,
+          "y": 175,
+          "width": 100,
+          "height": 75,
+          "color": "#6366f1"
+        }
+      ]
+    }
+  ],
+  "equipment": [
+    {
+      "id": "6f6f13e8-8178-4f64-a79b-fba5fbc4e0dc",
+      "type": "pc",
+      "inventoryNumber": "1101040136",
+      "responsibleUserId": "351ab18c-68e1-4282-b0d9-fe5c36b6288d",
+      "roomId": "120b81f3-6ef8-4e31-948b-e1dfd2ffe1e7",
+      "commissionDate": "2026-05-28",
+      "notes": "",
+      "ipMode": "dhcp",
+      "ipAddress": "",
+      "commonFields": {
+        "startYear": "219",
+        "model": "",
+        "serialNumber": ""
+      },
+      "specificFields": {
+        "driveSize": "500",
+        "driveType": "SSD",
+        "hostname": "ws-it-vda",
+        "os": "Windows",
+        "ram": "16"
+      },
+      "components": [
+        {
+          "id": "257a2955-5b5d-4d2e-9db5-d2797242138c",
+          "type": "monitor",
+          "name": "Samsung",
+          "inventoryNumber": "1101040121"
+        }
+      ]
+    },
+    {
+      "id": "26840ca9-8cd0-4653-a4eb-db94b1b28427",
+      "type": "pc",
+      "inventoryNumber": "1101043333",
+      "responsibleUserId": "51538021-c96e-45c5-98e6-a5639f97719d",
+      "roomId": "585427b1-0963-429c-a47c-15e40a8a6918",
+      "commissionDate": "2026-05-28",
+      "notes": "",
+      "ipMode": "dhcp",
+      "ipAddress": "",
+      "commonFields": {
+        "startYear": "2017",
+        "model": "",
+        "serialNumber": ""
+      },
+      "specificFields": {
+        "hostname": "ws-buh-aeyu",
+        "os": "Windows"
+      },
+      "components": []
+    }
+  ],
+  "licenses": []
+}

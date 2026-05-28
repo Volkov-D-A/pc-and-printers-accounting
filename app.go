@@ -492,7 +492,7 @@ func (a *App) ExportReportToXLSX(equipmentIDs []string) (string, error) {
 	}
 
 	// Set headers
-	headers := []string{"Инвентарный №", "Тип", "Производитель", "Модель", "Серийный №", "Кабинет", "Ответственный"}
+	headers := []string{"Инвентарный №", "Тип", "Год начала", "Модель", "Серийный №", "Кабинет", "Ответственный"}
 	for i, header := range headers {
 		cell, _ := excelize.CoordinatesToCellName(i+1, 1)
 		f.SetCellValue(sheetName, cell, header)
@@ -521,7 +521,7 @@ func (a *App) ExportReportToXLSX(equipmentIDs []string) (string, error) {
 		roomStr := ""
 		for _, r := range data.Rooms {
 			if r.ID == eq.RoomID {
-				roomStr = r.Number + " - " + r.Name
+				roomStr = r.Number
 				break
 			}
 		}
@@ -536,7 +536,7 @@ func (a *App) ExportReportToXLSX(equipmentIDs []string) (string, error) {
 
 		f.SetCellValue(sheetName, fmt.Sprintf("A%d", row), eq.InventoryNumber)
 		f.SetCellValue(sheetName, fmt.Sprintf("B%d", row), models.EquipmentTypeLabels[eq.Type])
-		f.SetCellValue(sheetName, fmt.Sprintf("C%d", row), eq.CommonFields.Manufacturer)
+		f.SetCellValue(sheetName, fmt.Sprintf("C%d", row), eq.CommonFields.StartYear)
 		f.SetCellValue(sheetName, fmt.Sprintf("D%d", row), eq.CommonFields.Model)
 		f.SetCellValue(sheetName, fmt.Sprintf("E%d", row), eq.CommonFields.SerialNumber)
 		f.SetCellValue(sheetName, fmt.Sprintf("F%d", row), roomStr)

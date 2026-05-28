@@ -1,6 +1,6 @@
 // === Типы техники ===
 
-export type EquipmentType = 'pc' | 'laptop' | 'monoblock' | 'printer' | 'mfp' | 'scanner' | 'router' | 'switch';
+export type EquipmentType = 'pc' | 'laptop' | 'monoblock' | 'printer' | 'mfp' | 'router' | 'switch';
 
 export const EQUIPMENT_TYPE_LABELS: Record<EquipmentType, string> = {
   pc: 'ПК',
@@ -8,18 +8,17 @@ export const EQUIPMENT_TYPE_LABELS: Record<EquipmentType, string> = {
   monoblock: 'Моноблок',
   printer: 'Принтер',
   mfp: 'МФУ',
-  scanner: 'Сканер',
   router: 'Маршрутизатор',
   switch: 'Коммутатор',
 };
 
 export const ALL_EQUIPMENT_TYPES: EquipmentType[] = [
-  'pc', 'laptop', 'monoblock', 'printer', 'mfp', 'scanner', 'router', 'switch',
+  'pc', 'laptop', 'monoblock', 'printer', 'mfp', 'router', 'switch',
 ];
 
 // === Типы комплектующих ===
 
-export type ComponentType = 'ram' | 'ssd' | 'hdd' | 'gpu' | 'psu' | 'nic' | 'motherboard' | 'cpu' | 'optical' | 'controller';
+export type ComponentType = 'ram' | 'ssd' | 'hdd' | 'gpu' | 'psu' | 'nic' | 'motherboard' | 'cpu' | 'optical' | 'controller' | 'monitor' | 'ups';
 
 export const COMPONENT_TYPE_LABELS: Record<ComponentType, string> = {
   ram: 'Оперативная память',
@@ -32,16 +31,18 @@ export const COMPONENT_TYPE_LABELS: Record<ComponentType, string> = {
   cpu: 'Процессор',
   optical: 'Оптический привод',
   controller: 'Контроллер (RAID и др.)',
+  monitor: 'Монитор',
+  ups: 'ИБП',
 };
 
 export const ALL_COMPONENT_TYPES: ComponentType[] = [
-  'ram', 'ssd', 'hdd', 'gpu', 'psu', 'nic', 'motherboard', 'cpu', 'optical', 'controller',
+  'ram', 'ssd', 'hdd', 'gpu', 'psu', 'nic', 'motherboard', 'cpu', 'optical', 'controller', 'monitor', 'ups',
 ];
 
 // === Модели данных ===
 
 export interface CommonFields {
-  manufacturer: string;
+  startYear: string;
   model: string;
   serialNumber: string;
 }
@@ -63,6 +64,8 @@ export interface Equipment {
   roomId: string;
   commissionDate: string;
   notes: string;
+  ipMode: string;
+  ipAddress: string;
   commonFields: CommonFields;
   specificFields: Record<string, unknown>;
   components: Component[];
@@ -90,7 +93,6 @@ export interface Room {
   id: string;
   floor: number;
   number: string;
-  name: string;
 }
 
 export interface FloorPlanRoom {

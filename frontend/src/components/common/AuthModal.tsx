@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { KeyRound, Lock } from 'lucide-react';
 import './AuthModal.css';
 
 interface AuthModalProps {
@@ -44,7 +45,7 @@ export default function AuthModal({ mode, onSubmit, onCancel, error }: AuthModal
     <div className="modal-overlay">
       <div className="modal auth-modal">
         <div className="auth-modal-icon">
-          {mode === 'setup' ? '🔐' : '🔒'}
+          {mode === 'setup' ? <KeyRound size={32} /> : <Lock size={32} />}
         </div>
         <h2 className="modal-title">
           {mode === 'setup' ? 'Установите пароль' : 'Введите пароль'}
