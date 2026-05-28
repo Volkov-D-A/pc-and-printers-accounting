@@ -1,0 +1,53 @@
+.equipment-form {
+  max-height: 70vh;
+  overflow-y: auto;
+  padding-right: var(--spacing-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+.form-section {
+  background: var(--bg-secondary);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--surface-border);
+}
+
+.section-subtitle {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 1px solid var(--surface-border);
+}
+
+.form-error {
+  padding: var(--spacing-md);
+  background: var(--accent-danger-subtle);
+  color: var(--accent-danger);
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--spacing-md);
+}
+
+.mt-sm {
+  margin-top: var(--spacing-sm);
+}
+
+.mt-md {
+  margin-top: var(--spacing-md);
+}
+
+.component-add-card {
+  background: var(--bg-card);
+  margin-bottom: var(--spacing-lg);
+  border-color: var(--accent-primary-subtle);
+  padding: var(--spacing-md);
+}
+
+.badge-secondary {
+  background: var(--surface-border-light);
+  color: var(--text-primary);
+}

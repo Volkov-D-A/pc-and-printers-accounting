@@ -1,0 +1,41 @@
+.equipment-page {
+  padding: var(--spacing-xl);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-xl);
+}
+
+.page-header .page-title {
+  margin-bottom: 0;
+}
+
+.filters {
+  display: flex;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-lg);
+}
+
+.table-container {
+  flex: 1;
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.table-container > .table {
+  margin: 0;
+}
+
+.table-container > div {
+  flex: 1;
+  overflow: auto;
+}

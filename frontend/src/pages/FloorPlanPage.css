@@ -1,0 +1,42 @@
+.floorplan-page {
+  padding: var(--spacing-xl);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.floor-tabs {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.floorplan-layout {
+  display: flex;
+  gap: var(--spacing-lg);
+  flex: 1;
+  min-height: 0; /* Важно для скролла */
+}
+
+.floorplan-svg-container {
+  flex: 1;
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+  background: var(--bg-primary); /* Темнее для контраста со стенами */
+}
+
+.floorplan-svg {
+  display: block;
+}
+
+.floorplan-sidebar {
+  width: 320px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.text-sm {
+  font-size: var(--font-size-sm);
+}
