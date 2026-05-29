@@ -3,7 +3,6 @@ import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Sidebar from './components/layout/Sidebar';
 import Header from './components/layout/Header';
 import AuthModal from './components/common/AuthModal';
-import DashboardPage from './pages/DashboardPage';
 import EquipmentPage from './pages/EquipmentPage';
 import FloorPlanPage from './pages/FloorPlanPage';
 import LicensesPage from './pages/LicensesPage';
@@ -149,7 +148,7 @@ export default function App() {
                 </Routes>
               ) : (
                 <Routes>
-                  <Route path="/" element={<DashboardPage />} />
+                  <Route path="/" element={<Navigate to="/equipment" replace />} />
                   <Route path="/equipment" element={<EquipmentPage />} />
                   <Route path="/floorplan" element={<FloorPlanPage />} />
                   <Route path="/licenses" element={<LicensesPage />} />

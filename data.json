@@ -1,6 +1,6 @@
 {
-  "version": 33,
-  "lastModified": "2026-05-28T23:42:52+05:00",
+  "version": 38,
+  "lastModified": "2026-05-29T10:11:15+05:00",
   "modifiedBy": "dimas",
   "building": {
     "name": "Главный корпус",
@@ -287,6 +287,8 @@
       "notes": "",
       "ipMode": "dhcp",
       "ipAddress": "",
+      "inRepair": false,
+      "repairDate": "2026-05-29",
       "commonFields": {
         "startYear": "219",
         "model": "",
@@ -318,14 +320,19 @@
       "notes": "",
       "ipMode": "dhcp",
       "ipAddress": "",
+      "inRepair": false,
+      "repairDate": "",
       "commonFields": {
         "startYear": "2017",
         "model": "",
         "serialNumber": ""
       },
       "specificFields": {
+        "driveSize": "250",
+        "driveType": "SSD",
         "hostname": "ws-buh-aeyu",
-        "os": "Windows"
+        "os": "Windows",
+        "ram": "8"
       },
       "components": []
     },
@@ -339,6 +346,8 @@
       "notes": "",
       "ipMode": "dhcp",
       "ipAddress": "",
+      "inRepair": false,
+      "repairDate": "",
       "commonFields": {
         "startYear": "2016",
         "model": "Asus",
@@ -352,7 +361,37 @@
         "ram": "8"
       },
       "components": []
+    },
+    {
+      "id": "ca8800cd-87ab-46b3-8822-9f556bc4241d",
+      "type": "mfp",
+      "inventoryNumber": "1101040122",
+      "responsibleUserId": "351ab18c-68e1-4282-b0d9-fe5c36b6288d",
+      "roomId": "120b81f3-6ef8-4e31-948b-e1dfd2ffe1e7",
+      "commissionDate": "2026-05-29",
+      "notes": "",
+      "ipMode": "dhcp",
+      "ipAddress": "",
+      "inRepair": false,
+      "repairDate": "",
+      "commonFields": {
+        "startYear": "2022",
+        "model": "Pantum",
+        "serialNumber": "111"
+      },
+      "specificFields": {},
+      "components": []
     }
   ],
-  "licenses": []
+  "licenses": [
+    {
+      "id": "55a3bed3-d580-4420-8968-1d9937875149",
+      "softwareName": "Крипто ПРО",
+      "licenseKey": "111-222-333",
+      "licenseType": "perpetual",
+      "userId": "351ab18c-68e1-4282-b0d9-fe5c36b6288d",
+      "purchaseDate": "2026-05-28",
+      "quantity": 1
+    }
+  ]
 }

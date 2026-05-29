@@ -42,6 +42,15 @@ export default function EquipmentViewModal({ equipment, onClose, onEdit }: Equip
         </div>
 
         <div className="view-modal-content">
+          {equipment.inRepair && (
+            <div style={{ padding: 'var(--spacing-md)', background: 'var(--accent-warning)', color: '#fff', borderRadius: 'var(--border-radius-md)', marginBottom: 'var(--spacing-lg)', display: 'flex', alignItems: 'center', gap: 'var(--spacing-sm)' }}>
+              <span style={{ fontSize: '1.2rem' }}>🔧</span>
+              <span style={{ fontWeight: 'bold' }}>
+                Оборудование находится в ремонте {equipment.repairDate ? `с ${equipment.repairDate}` : ''}
+              </span>
+            </div>
+          )}
+          
           <section>
             <h3 className="view-section-title">Общая информация</h3>
             <div className="view-grid">

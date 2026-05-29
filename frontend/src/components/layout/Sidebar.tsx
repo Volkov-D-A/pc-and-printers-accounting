@@ -1,7 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { useAppContext } from '../../context/AppContext';
 import { 
-  BarChart3, 
   Monitor, 
   Building2, 
   ScrollText, 
@@ -12,7 +11,6 @@ import {
 import './Sidebar.css';
 
 const navItems = [
-  { path: '/', label: 'Главная', icon: <BarChart3 size={20} /> },
   { path: '/equipment', label: 'Техника', icon: <Monitor size={20} /> },
   { path: '/floorplan', label: 'Поэтажный план', icon: <Building2 size={20} /> },
   { path: '/licenses', label: 'Лицензии', icon: <ScrollText size={20} /> },

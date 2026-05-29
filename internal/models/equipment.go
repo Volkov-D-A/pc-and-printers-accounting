@@ -49,6 +49,8 @@ type Equipment struct {
 	Notes             string                 `json:"notes"`
 	IPMode            string                 `json:"ipMode"`
 	IPAddress         string                 `json:"ipAddress"`
+	InRepair          bool                   `json:"inRepair"`
+	RepairDate        string                 `json:"repairDate"`
 	CommonFields      CommonFields           `json:"commonFields"`
 	SpecificFields    map[string]interface{} `json:"specificFields"`
 	Components        []Component            `json:"components"`

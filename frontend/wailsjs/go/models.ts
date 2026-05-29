@@ -113,6 +113,8 @@ export namespace models {
 	    notes: string;
 	    ipMode: string;
 	    ipAddress: string;
+	    inRepair: boolean;
+	    repairDate: string;
 	    commonFields: CommonFields;
 	    specificFields: Record<string, any>;
 	    components: Component[];
@@ -132,6 +134,8 @@ export namespace models {
 	        this.notes = source["notes"];
 	        this.ipMode = source["ipMode"];
 	        this.ipAddress = source["ipAddress"];
+	        this.inRepair = source["inRepair"];
+	        this.repairDate = source["repairDate"];
 	        this.commonFields = this.convertValues(source["commonFields"], CommonFields);
 	        this.specificFields = source["specificFields"];
 	        this.components = this.convertValues(source["components"], Component);

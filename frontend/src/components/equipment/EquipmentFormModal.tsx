@@ -24,6 +24,8 @@ export default function EquipmentFormModal({ equipment, onClose, onSave }: Equip
     ipMode: 'dhcp',
     ipAddress: '',
     commonFields: { startYear: '', model: '', serialNumber: '' },
+    inRepair: false,
+    repairDate: '',
     specificFields: {},
     components: [],
   });
@@ -186,6 +188,30 @@ export default function EquipmentFormModal({ equipment, onClose, onSave }: Equip
                 <div className="form-group">
                   <label className="form-label">IP Адрес</label>
                   <input className="input" placeholder="192.168.1.10" value={formData.ipAddress} onChange={(e) => handleChange('ipAddress', e.target.value)} />
+                </div>
+              )}
+            </div>
+            
+            <div className="form-row" style={{ marginTop: 'var(--spacing-md)', padding: 'var(--spacing-md)', background: 'var(--bg-tertiary)', borderRadius: 'var(--border-radius-md)' }}>
+              <div className="form-group" style={{ display: 'flex', alignItems: 'center', gap: 'var(--spacing-sm)', marginBottom: 0 }}>
+                <input 
+                  type="checkbox" 
+                  id="inRepair" 
+                  checked={!!formData.inRepair} 
+                  onChange={(e) => {
+                    handleChange('inRepair', e.target.checked);
+                    if (e.target.checked && !formData.repairDate) {
+                      handleChange('repairDate', new Date().toISOString().split('T')[0]);
+                    }
+                  }} 
+                  style={{ width: '18px', height: '18px', cursor: 'pointer' }}
+                />
+                <label htmlFor="inRepair" className="form-label" style={{ marginBottom: 0, cursor: 'pointer', fontWeight: 'bold' }}>Оборудование в ремонте</label>
+              </div>
+              {formData.inRepair && (
+                <div className="form-group" style={{ marginBottom: 0 }}>
+                  <label className="form-label">Дата передачи в ремонт</label>
+                  <input type="date" className="input" value={formData.repairDate || ''} onChange={(e) => handleChange('repairDate', e.target.value)} />
                 </div>
               )}
             </div>

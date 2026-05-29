@@ -66,6 +66,8 @@ export interface Equipment {
   notes: string;
   ipMode: string;
   ipAddress: string;
+  inRepair?: boolean;
+  repairDate?: string;
   commonFields: CommonFields;
   specificFields: Record<string, unknown>;
   components: Component[];

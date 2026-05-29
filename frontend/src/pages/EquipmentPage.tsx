@@ -17,6 +17,7 @@ export default function EquipmentPage() {
   const [userFilter, setUserFilter] = useState('');
   const [yearFrom, setYearFrom] = useState('');
   const [yearTo, setYearTo] = useState('');
+  const [repairFilter, setRepairFilter] = useState<'all' | 'working' | 'repair'>('all');
   
   const [showForm, setShowForm] = useState(false);
   const [editingItem, setEditingItem] = useState<Equipment | null>(null);
@@ -43,10 +44,11 @@ export default function EquipmentPage() {
       const eqYear = parseInt(eq.commonFields.startYear || '0') || 0;
       const matchYearFrom = yearFrom ? eqYear >= parseInt(yearFrom) : true;
       const matchYearTo = yearTo ? eqYear <= parseInt(yearTo) : true;
+      const matchRepair = repairFilter === 'all' ? true : (repairFilter === 'repair' ? eq.inRepair : !eq.inRepair);
 
-      return matchSearch && matchType && matchModel && matchRoom && matchUser && matchYearFrom && matchYearTo;
+      return matchSearch && matchType && matchModel && matchRoom && matchUser && matchYearFrom && matchYearTo && matchRepair;
     });
-  }, [equipmentList, searchTerm, typeFilter, modelFilter, roomFilter, userFilter, yearFrom, yearTo]);
+  }, [equipmentList, searchTerm, typeFilter, modelFilter, roomFilter, userFilter, yearFrom, yearTo, repairFilter]);
 
   const handleAdd = () => {
     setEditingItem(null);
@@ -146,6 +148,17 @@ export default function EquipmentPage() {
         <div className="form-group" style={{ minWidth: '150px' }}>
           <select
             className="select"
+            value={repairFilter}
+            onChange={(e) => setRepairFilter(e.target.value as any)}
+          >
+            <option value="all">Все состояния</option>
+            <option value="working">В строю</option>
+            <option value="repair">В ремонте</option>
+          </select>
+        </div>
+        <div className="form-group" style={{ minWidth: '150px' }}>
+          <select
+            className="select"
             value={roomFilter}
             onChange={(e) => setRoomFilter(e.target.value)}
           >
@@ -219,10 +232,13 @@ export default function EquipmentPage() {
 
                 return (
                   <tr key={eq.id} onClick={(e) => handleRowClick(eq, e)} style={{ cursor: 'pointer' }} className="table-row-hover">
-                    <td>
-                      <span className="badge badge-primary">{eq.inventoryNumber}</span>
-                    </td>
-                    <td>{EQUIPMENT_TYPE_LABELS[eq.type]}</td>
+                    <td
+                        style={{ cursor: 'pointer', fontWeight: '500' }}
+                      >
+                        <span className="badge badge-primary">{eq.inventoryNumber}</span>
+                        {eq.inRepair && <span style={{ marginLeft: '4px' }} title="В ремонте">🔧</span>}
+                      </td>
+                      <td>{EQUIPMENT_TYPE_LABELS[eq.type]}</td>
                     <td>
                       <div style={{ fontWeight: 'var(--font-weight-medium)' }}>{eq.commonFields.model}</div>
                       <div style={{ fontSize: 'var(--font-size-sm)', color: 'var(--text-secondary)' }}>
