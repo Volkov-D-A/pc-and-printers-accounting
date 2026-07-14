@@ -1,7 +1,7 @@
 WAILS ?= wails
 GOCACHE ?= /tmp/go-build-cache
 WAILS_TAGS ?= webkit2_41
-APP_NAME ?= counting-embroidery-threads
+APP_NAME ?= pc-inventory
 
 TAG_FLAGS := $(if $(strip $(WAILS_TAGS)),-tags "$(WAILS_TAGS)",)
 
